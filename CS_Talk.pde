@@ -49,12 +49,14 @@ void setup() {
   initShapes();
   initWaves();
   initTunnel();
-  currentSlide = TOOLSET;
+  initTablePOC();
+  //currentSlide = TOOLSET;
+ 
 }
 
 void draw() {
   checkSkeleton();
-  drawSlides();
+  //drawSlides();
   //drawWomenGraph();
   //image(kinect.getDepthMaskImage(), 0, 0);
 
@@ -65,6 +67,7 @@ void draw() {
 
   //fill(255, 0, 0);
   //text(frameRate, 50, 50);
+   drawTablePOC();
 }
 
 
