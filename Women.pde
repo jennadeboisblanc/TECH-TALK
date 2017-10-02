@@ -36,7 +36,7 @@ void drawWomenGraph() {
     stroke(255, 0, 0);
     line(i * yearSpace+leftMargin, cs, (i+1) * yearSpace+leftMargin, cs2);
   }
-  textSize(30);
+  textSize(50);
   drawAxes(leftMargin, topMargin, yearSpace, scaler);
   drawFifty(leftMargin, topMargin, scaler);
   drawLegend(leftMargin, topMargin, scaler);
@@ -51,14 +51,14 @@ void drawAxes(int leftMargin, int topMargin, int yearSpace, float scaler) {
   line(leftMargin, scaler + topMargin, width - leftMargin, scaler + topMargin);
 
   // x axis
-  for (int i = 2; i < table.getRowCount(); i+=5) {
+  for (int i = 4; i < table.getRowCount(); i+=10) {
 
     TableRow row = table.getRow(i);
     int date = row.getInt("date");
     stroke(255);
     fill(255);
     //textSize(18);
-    text(date, i * yearSpace + leftMargin - textWidth(date+"")/2, scaler + topMargin + 30);
+    text(date, i * yearSpace + leftMargin - textWidth(date+"")/2, scaler + topMargin + 50);
     strokeWeight(2);
     line(i * yearSpace + leftMargin, scaler + topMargin - 5, i * yearSpace + leftMargin, scaler + topMargin +5);
   }
@@ -67,7 +67,7 @@ void drawAxes(int leftMargin, int topMargin, int yearSpace, float scaler) {
   strokeWeight(4);
   line(leftMargin, topMargin+100, leftMargin, topMargin + scaler);
   strokeWeight(2);
-  for (int i = 0; i < 80; i += 10) {
+  for (int i = 0; i < 80; i += 50) {
     line(leftMargin-5, scaler + topMargin - i*scaler/100.0, leftMargin+5, scaler + topMargin - i*scaler/100.0);
     text(i + "%", leftMargin - textWidth(i+"%") - 20, scaler + topMargin - i*scaler/100.0+8);
   }
@@ -82,7 +82,7 @@ void drawFifty(int leftMargin, int topMargin, float scaler) {
 void drawLegend(int leftMargin, int topMargin, float scaler) {
 
   pushMatrix();
-  int dy = 30;
+  int dy = 60;
   translate(30, topMargin + 100, 0);
   stroke(255);
   text("CS", leftMargin+25, 17);

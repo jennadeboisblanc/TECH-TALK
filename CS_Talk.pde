@@ -38,17 +38,21 @@ void setup() {
 
   myMovie = new Movie(this, "myProjects780.mov");
   //myMovie.loop();
-  myMovie.play();
+  //myMovie.play();
   //println(myMovie.available());
 
   for (int i = 0; i < 100; i++) {
     boolean isFemale = i > 87;
     people[i] = new StickFigure((i % 20)*80+(width - 20*80)/2, (i/20) * 130+200, isFemale);
   }
+  initSmoke();
+  initShapes();
+  initWaves();
+  initTunnel();
+  currentSlide = TOOLSET;
 }
 
 void draw() {
-  background(0);
   checkSkeleton();
   drawSlides();
   //drawWomenGraph();
@@ -58,8 +62,6 @@ void draw() {
   //image(kinect.getColorImage(), 0, 0, width, height);
   //drawSkeleton();
 
-
-  //computingJobs();
 
   //fill(255, 0, 0);
   //text(frameRate, 50, 50);
@@ -79,6 +81,14 @@ void drawSlides() {
     slideDrawHesse();
   } else if (currentSlide == WHYTECH) {  
     slideWhyTech();
+  } else if (currentSlide == JOBS) {
+    slideJobs();
+  } else if (currentSlide == HIGHPAY) {
+    slideHighPay();
+  } else if (currentSlide == TOOLSET) {
+    slideToolset();
+  } else if (currentSlide == WOMENINTECH) {
+    slideWomenInTech();
   } else if (currentSlide == PERCENTWOMEN) {  
     raiseEmUp = true;
     slidePercentWomen();
@@ -113,10 +123,25 @@ void advanceSlide() {
       overviewStep = 2;
       currentSlide++;
     }
-  } else {
+  } else if (currentSlide == JOBS) {
+    jobIndex++;
+    if (jobIndex > 3) {
+      jobIndex = 3;
+      currentSlide++;
+    }
+  } else if (currentSlide == TOOLSET) {
+    tool++;
+    if (tool > 5) {
+      tool = 5;
+      currentSlide++;
+    }
+  }else {
     currentSlide++;
     if (currentSlide == OVERVIEW) startTime = millis();
+    else if (currentSlide == DEBB) deBBFlag = true;
     else if (currentSlide == PERCENTWOMEN) startTime = millis();
+    else if (currentSlide == MYPROJECTS) myMovie.play();
+    else if (currentSlide == MYPROJECTS + 1) myMovie.pause();
     else if (currentSlide >= totalSlides) currentSlide = totalSlides-1;
   }
 }
@@ -128,8 +153,22 @@ void previousSlide() {
       overviewStep = 0;
       currentSlide--;
     }
-  } else {
+  } else if (currentSlide == JOBS) {
+    jobIndex--;
+    if (jobIndex < 0) {
+      jobIndex = 0;
+      currentSlide--;
+    }
+  } else if (currentSlide == TOOLSET) {
+    tool--;
+    if (tool < 0) {
+      tool = 0;
+      currentSlide--;
+    }
+  }
+  else {
     currentSlide--;
+    if (currentSlide == MYPROJECTS -1) myMovie.pause();
     if (currentSlide < 0) currentSlide = 0;
   }
 }
